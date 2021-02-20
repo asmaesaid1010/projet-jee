@@ -1,0 +1,36 @@
+<div class="container">
+  <div class=" row col-md-9 col-md-offset-2">
+
+
+    <ul class="list-group list-group-flush">
+
+      <li class="list-group-item list-group-flush" *ngIf="isAdmin()">
+        <label>Roles </label>
+        <select class="custom-select" [(ngModel)]="roleName">
+          <option *ngFor="let r of roles" name="roleName">
+            {{r.roleName}}
+          </option>
+        </select>
+
+        <button class="btn btn-primary ml-4" type="button" [disabled]="!roleUserForm.username && !isAdmin()"
+                (click)="onAddRoleToSelectedUser(roleName)">
+          AddRoleToSelectedUser
+        </button>
+
+      </li>
+
+      <li class="list-group-item   " *ngFor="let u of users">
+        <button class="btn btn-primary " (click)="onGetUsername(u.username)" [disabled]="!isAdmin()">
+          <label> {{u.username}}</label>
+        </button>
+        <ul class="list-group" *ngFor="let r of u.appRoles">
+          <li class="list-group-item list-group-item-danger mt-5"> {{r.roleName}}</li>
+        </ul>
+
+      </li>
+
+    </ul>
+
+
+  </div>
+</div>
